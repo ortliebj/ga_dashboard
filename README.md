@@ -1,18 +1,36 @@
 ## Google Analytics Dashboard
 
-This is a learning project. It's the first time I have  attempted to query 
-an API, the first time I've written my own modules, and the first time
-I really dove into git. The code and structure might not be the best, but 
-the whole point was to learn, so I don't care. I also realized too late that 
-I should have included a config.py file, and there was some sensitive info 
-in the program. So I deleted the couple months commit history and started new.
+This is a simple dashboard to display Google Analytics pageviews for the past 
+day, week, and month on a local webpage.
 
-Anyways, what's this project about? 
-This is a Flask app that is supposed to run on my raspberry pi. It makes three
-separate requests (for past day/week/month) to the Google Analytics API and 
-saves the responses to json files. Then those files are opened up and parsed to 
-get what we really care about: the page views (or whatever metrics and 
-dimensions you choose to request). This data then gets displayed on a simple
-webpage running from the localhost.
+### Prerequites
+Python 3.6 or later, pip, and venv (or another virtual environment).
 
-And that's it. Its simple. 
+### Installation
+
+Download the files and unzip them, or clone this repo to a folder on your
+computer. cd to that directory, then create a virtual environmnet with:
+```
+python3 -m venv env
+```
+Activate the environment:
+```
+source bin/env/activate
+```
+Install the required packages:
+```
+pip3 install -r requirements.txt
+```
+### Setup
+Create an application on [Google's Developer Site](https://developers.google.com/)
+and download the client_secrets.json file. Copy that into secrets/. Find your
+Google Analytics view ID to copy into app/api_call.py as the VIEW_ID variable.
+
+### Deployment
+At the moment, you need to run api_call and parse_data manually whenever 
+you want the data to update. You could of course schedule this in the terminal,
+I just haven't done that yet. Anyways, `python3 api_call.py` followed by
+`parse_data.py` will create a data/ folder in the main directory if run for 
+the first time or replace what's there any time after that. Run the 
+flask app with `python3 run.py` and open a browser to http://0.0.0.0/8080 to
+see the data.

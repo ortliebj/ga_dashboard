@@ -103,5 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# my client secrets 
+# my stuff 
 secrets/my_client_secrets.json
+data/
